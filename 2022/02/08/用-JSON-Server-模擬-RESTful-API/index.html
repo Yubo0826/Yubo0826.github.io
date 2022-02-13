@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>用 JSON Server 模擬 RESTful API - Hexo</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Hexo"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hexo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="當練習或開發時需要透過 API取得資料，而手邊正沒有符合的 API可以用時，就可以 JSON Sever 這個 JS 套件，幫我們建立一個 API Server，只需要建立一個JSON形式的資料。 JSON Server 安裝步驟https:&amp;#x2F;&amp;#x2F;github.com&amp;#x2F;typicode&amp;#x2F;json-server  Install JSON Server  1npm install -g json-se"><meta property="og:type" content="blog"><meta property="og:title" content="用 JSON Server 模擬 RESTful API"><meta property="og:url" content="http://example.com/2022/02/08/%E7%94%A8-JSON-Server-%E6%A8%A1%E6%93%AC-RESTful-API/"><meta property="og:site_name" content="Hexo"><meta property="og:description" content="當練習或開發時需要透過 API取得資料，而手邊正沒有符合的 API可以用時，就可以 JSON Sever 這個 JS 套件，幫我們建立一個 API Server，只需要建立一個JSON形式的資料。 JSON Server 安裝步驟https:&amp;#x2F;&amp;#x2F;github.com&amp;#x2F;typicode&amp;#x2F;json-server  Install JSON Server  1npm install -g json-se"><meta property="og:locale" content="en_US"><meta property="og:image" content="http://example.com/2022/02/08/%E7%94%A8-JSON-Server-%E6%A8%A1%E6%93%AC-RESTful-API/result.png"><meta property="article:published_time" content="2022-02-08T15:32:25.000Z"><meta property="article:modified_time" content="2022-02-09T04:37:38.295Z"><meta property="article:author" content="John Doe"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/2022/02/08/%E7%94%A8-JSON-Server-%E6%A8%A1%E6%93%AC-RESTful-API/result.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2022/02/08/%E7%94%A8-JSON-Server-%E6%A8%A1%E6%93%AC-RESTful-API/"},"headline":"用 JSON Server 模擬 RESTful API","image":["http://example.com/2022/02/08/%E7%94%A8-JSON-Server-%E6%A8%A1%E6%93%AC-RESTful-API/result.png"],"datePublished":"2022-02-08T15:32:25.000Z","dateModified":"2022-02-09T04:37:38.295Z","author":{"@type":"Person","name":"John Doe"},"publisher":{"@type":"Organization","name":"Hexo","logo":{"@type":"ImageObject","url":{"text":"BO-YU CHOU"}}},"description":"當練習或開發時需要透過 API取得資料，而手邊正沒有符合的 API可以用時，就可以 JSON Sever 這個 JS 套件，幫我們建立一個 API Server，只需要建立一個JSON形式的資料。 JSON Server 安裝步驟https:&#x2F;&#x2F;github.com&#x2F;typicode&#x2F;json-server  Install JSON Server  1npm install -g json-se"}</script><link rel="canonical" href="http://example.com/2022/02/08/%E7%94%A8-JSON-Server-%E6%A8%A1%E6%93%AC-RESTful-API/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+          Array
+              .from(document.querySelectorAll('.tab-content'))
+              .forEach($tab => {
+                  $tab.classList.add('is-hidden');
+              });
+          Array
+              .from(document.querySelectorAll('.tabs li'))
+              .forEach($tab => {
+                  $tab.classList.remove('is-active');
+              });
+          const $activeTab = document.querySelector(location.hash);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+          const $tabMenu = document.querySelector(`a[href="${location.hash}"]`);
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">BO-YU CHOU</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="我的 GitHub" href="https://github.com/Yubo0826"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-02-08T15:32:25.000Z" title="2022/2/8 下午11:32:25">2022-02-08</time></span><span class="level-item">Updated&nbsp;<time dateTime="2022-02-09T04:37:38.295Z" title="2022/2/9 下午12:37:38">2022-02-09</time></span><span class="level-item">3 minutes read (About 429 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">用 JSON Server 模擬 RESTful API</h1><div class="content"><p>當練習或開發時需要透過 API取得資料，而手邊正沒有符合的 API可以用時，就可以 JSON Sever 這個 JS 套件，幫我們建立一個 API Server，只需要建立一個JSON形式的資料。</p>
+<h3 id="JSON-Server-安裝步驟"><a href="#JSON-Server-安裝步驟" class="headerlink" title="JSON Server 安裝步驟"></a>JSON Server 安裝步驟</h3><p><a target="_blank" rel="noopener" href="https://github.com/typicode/json-server">https://github.com/typicode/json-server</a></p>
+<ol>
+<li>Install JSON Server</li>
+</ol>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g json-server</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>創建 db.json 並輸入資料</li>
+</ol>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;posts&quot;</span>: [</span><br><span class="line">    &#123; <span class="string">&quot;id&quot;</span>: <span class="number">1</span>, <span class="string">&quot;title&quot;</span>: <span class="string">&quot;json-server&quot;</span>, <span class="string">&quot;author&quot;</span>: <span class="string">&quot;typicode&quot;</span> &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">&quot;comments&quot;</span>: [</span><br><span class="line">    &#123; <span class="string">&quot;id&quot;</span>: <span class="number">1</span>, <span class="string">&quot;body&quot;</span>: <span class="string">&quot;some comment&quot;</span>, <span class="string">&quot;postId&quot;</span>: <span class="number">1</span> &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">&quot;profile&quot;</span>: &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;typicode&quot;</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>Start JSON Server</li>
+</ol>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">json-server --watch db.<span class="property">json</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>訪問 <a target="_blank" rel="noopener" href="http://localhost:3000/posts/1">http://localhost:3000/posts/1</a><br>就可以得到資料</li>
+</ol>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">&quot;id&quot;</span>: <span class="number">1</span>, <span class="string">&quot;title&quot;</span>: <span class="string">&quot;json-server&quot;</span>, <span class="string">&quot;author&quot;</span>: <span class="string">&quot;typicode&quot;</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="搭配-axios-實作"><a href="#搭配-axios-實作" class="headerlink" title="搭配 axios 實作"></a>搭配 axios 實作</h3><ol>
+<li>專案資料夾 npm init (使用 npm前要先安裝 node)，創建 package.json ，package.json是掌管專案資訊的重要檔案。</li>
+<li><strong>npm install</strong> axios</li>
+<li>創建一個 main.js，輸入以下代碼</li>
+</ol>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&quot;axios&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">api</span>(<span class="params"></span>) &#123;</span><br><span class="line">    axios.<span class="title function_">get</span>(<span class="string">&#x27;http://localhost:3000/posts&#x27;</span>).<span class="title function_">then</span>(</span><br><span class="line">        <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">            process.<span class="property">stdout</span>.<span class="title function_">write</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(res.<span class="property">data</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">api</span>();</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>終端輸入 node main.js ，run 我們的JS檔案，就可以看到抓取到的資料了。</li>
+</ol>
+<img src="/2022/02/08/%E7%94%A8-JSON-Server-%E6%A8%A1%E6%93%AC-RESTful-API/result.png">
+
+<h3 id="自訂自己的-npm-command"><a href="#自訂自己的-npm-command" class="headerlink" title="自訂自己的 npm command"></a>自訂自己的 npm command</h3><ol>
+<li>在 package.json中，在 scripts去定義自己的npm command，這裡命名為 json，去操作 json-server 開啟指令，並設定 port 為8888。</li>
+</ol>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;json&quot;</span>: <span class="string">&quot;json-server --watch db.json --port 8888&quot;</span></span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>設定好後，在 終端機上輸入 npm run json 就可以執行 json-server –watch db.json –port 8888 這項指令。</li>
+</ol>
+<p>相關文連結:</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://medium.com/html-test/%E5%BE%9E%E9%9B%B6%E9%96%8B%E5%A7%8B-%E4%BD%BF%E7%94%A8npm%E5%A5%97%E4%BB%B6-317beefdf182">https://medium.com/html-test/從零開始-使用npm套件-317beefdf182</a></li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/@debbyji/%E7%94%A8-json-server-%E6%A8%A1%E6%93%AC-restful-api-f07abda3927c">https:&#x2F;&#x2F;medium.com&#x2F;@debbyji&#x2F;用-json-server-模擬-restful-api-f07abda3927c</a></li>
+<li>[<a target="_blank" rel="noopener" href="https://ithelp.it/">https://ithelp.it</a></li>
+</ol>
+</div><div class="article-licensing box"><div class="licensing-title"><p>用 JSON Server 模擬 RESTful API</p><p><a href="http://example.com/2022/02/08/用-JSON-Server-模擬-RESTful-API/">http://example.com/2022/02/08/用-JSON-Server-模擬-RESTful-API/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>John Doe</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2022-02-08</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2022-02-09</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>Afdian.net</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/" alt="Alipay"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>Buy me a coffee</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2022/02/13/SPA/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">不靠框架，JS 如何實現 SPA ? | 背後的一些概念</span></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/BearRun.gif" alt="David"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">David</p><p class="is-size-6 is-block">前端工程師</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>台灣 新北市 New Taipei City</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">2</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">0</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">0</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/Yubo0826" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/Yubo0826"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><!--!--><!--!--><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-02-12T16:46:57.000Z">2022-02-13</time></p><p class="title"><a href="/2022/02/13/SPA/">不靠框架，JS 如何實現 SPA ? | 背後的一些概念</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-02-08T15:32:25.000Z">2022-02-08</time></p><p class="title"><a href="/2022/02/08/%E7%94%A8-JSON-Server-%E6%A8%A1%E6%93%AC-RESTful-API/">用 JSON Server 模擬 RESTful API</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/02/"><span class="level-start"><span class="level-item">February 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><!--!--><div class="card widget"><div class="card-content"><div class="notification is-danger">You need to set <code>client_id</code> and <code>slot_id</code> to show this AD unit. Please set it in <code>_config.yml</code>.</div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">BO-YU CHOU</a><p class="is-size-7"><span>&copy; 2022 John Doe</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/Yubo0826"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
